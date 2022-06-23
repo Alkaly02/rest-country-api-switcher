@@ -1,20 +1,19 @@
 import './App.css';
 import Header from './components/Header';
-import AllCountries from './pages/AllCountries';
-import SearchFilter from './components/SearchFilter';
-import useCountry from './hooks/useCountry';
-import Loader from './components/Loader';
+import {Routes, Route} from 'react-router-dom'
+import CountryDetails from './pages/CountryDetails';
+import Home from './pages/Home';
 
 function App() {
-  const {loading} = useCountry()
+    
   return (
     <div className="container-md px-0">
       <Header />
       <section className='m-0 p-3'>
-          <SearchFilter />
-          {
-            loading ? <Loader /> : <AllCountries />
-          }
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/:countryName' element={<CountryDetails />} />
+          </Routes>
       </section>
     </div>
   );
