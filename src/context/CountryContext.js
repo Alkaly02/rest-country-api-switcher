@@ -23,6 +23,7 @@ export const CountryProvider = ({children}) => {
     }, [])
 
     const value = {
+        loading,
         countries,
         showCountries,
         setCountries,
@@ -31,7 +32,7 @@ export const CountryProvider = ({children}) => {
 
     return (
         <CountryContext.Provider value={value}>
-            { !loading && children}
+            {children}
         </CountryContext.Provider>
     )
 }

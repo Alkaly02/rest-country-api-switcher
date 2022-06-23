@@ -28,7 +28,7 @@ const SearchFilter = () => {
         if(countryWithSameRegion.length !== 0){
             setShowCountries(countryWithSameRegion)
         }
-    }, [select, countries])
+    }, [select, countries, setShowCountries])
 
   return (
     <div className='d-sm-flex justify-content-between align-items-center position-relative'>

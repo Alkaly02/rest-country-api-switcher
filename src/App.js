@@ -1,18 +1,20 @@
 import './App.css';
 import Header from './components/Header';
 import AllCountries from './pages/AllCountries';
-import { CountryProvider } from './context/CountryContext';
 import SearchFilter from './components/SearchFilter';
+import useCountry from './hooks/useCountry';
+import Loader from './components/Loader';
 
 function App() {
+  const {loading} = useCountry()
   return (
     <div className="container-md px-0">
       <Header />
       <section className='m-0 p-3'>
-        <CountryProvider>
           <SearchFilter />
-          <AllCountries />
-        </CountryProvider>
+          {
+            loading ? <Loader /> : <AllCountries />
+          }
       </section>
     </div>
   );
