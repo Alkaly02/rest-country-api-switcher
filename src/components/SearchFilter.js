@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {FaSearchLocation} from 'react-icons/fa'
 import useCountry from '../hooks/useCountry';
 
 const SearchFilter = () => {
     const {countries, setShowCountries} = useCountry()
     const [input, setInput] = useState('');
+    const [select, setSelect] = useState('')
     const [error, setError] = useState('');
 
     const handleSubmit = (e) => {
@@ -18,6 +19,16 @@ const SearchFilter = () => {
             setError('Pays intouvable !')
         }
     }
+
+    const handleSelect = (e) => {
+        setSelect(e.target.value)
+    }
+    useEffect(() => {
+        const countryWithSameRegion = countries.filter(country => country.region.toUpperCase() === select.toUpperCase());
+        if(countryWithSameRegion.length !== 0){
+            setShowCountries(countryWithSameRegion)
+        }
+    }, [select, countries])
 
   return (
     <div className='d-sm-flex justify-content-between align-items-center position-relative'>
@@ -38,14 +49,16 @@ const SearchFilter = () => {
             }
         </div>
         <div className="select shadow">
-        <select className="form-select" aria-label="Default select example">
-            <option defaultValue>Filter by Region</option>
-            <option value="1">Africa</option>
-            <option value="2">America</option>
-            <option value="3">Asia</option>
-            <option value="3">Europe</option>
-            <option value="3">Oceania</option>
-        </select>
+            <select 
+            onChange={handleSelect} 
+            className="form-select" 
+            aria-label="Default select example">
+                <option value='' >Filter by Region</option>
+                <option value="africa">Africa</option>
+                <option value="asia">Asia</option>
+                <option value="europe">Europe</option>
+                <option value="oceania">Oceania</option>
+            </select>
         </div>
     </div>
   )
