@@ -8,11 +8,13 @@ export const CountryProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
 
     const [countries, setCountries] = useState([]);
+    const [showCountries, setShowCountries] = useState()
+    
     const getData = async () => {
         const res = await fetch(`https://restcountries.com/v3.1/all`);
         const data = await res.json()
-        console.log(data)
         setCountries(data)
+        setShowCountries(data)
         setLoading(false)
     }
 
@@ -21,7 +23,10 @@ export const CountryProvider = ({children}) => {
     }, [])
 
     const value = {
-        countries
+        countries,
+        showCountries,
+        setCountries,
+        setShowCountries
     }
 
     return (
