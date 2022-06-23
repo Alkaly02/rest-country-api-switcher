@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const CountryItem = ({flag, name, population, region, capital}) => {
   return (
-    <div className="card">
+    <div style={{minHeight: '450px'}} className="card">
         <img style={{height: '200px', objectFit: 'cover'}} src={flag} alt="" className="img-card" />
         <div className="card-body">
             <h4 className="text-title">{name}</h4>

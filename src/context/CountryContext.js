@@ -20,8 +20,7 @@ export const CountryProvider = ({children}) => {
 
     useEffect(() => {
         getData()
-        console.log(countries)
-    }, [countries])
+    }, [])
 
     const value = {
         loading,

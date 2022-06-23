@@ -45,7 +45,7 @@ const SearchFilter = () => {
                 aria-describedby="searchHelp" />
             </form>
             {
-                error && <div style={{zIndex: '999', left: '45%'}} className='bg-danger p-3 position-absolute text-light'>{error}</div>
+                error && <div style={{zIndex: '999', left: '45%'}} className='bg-danger p-2 position-absolute text-light'>{error}</div>
             }
         </div>
         <div className="select shadow">
@@ -55,6 +55,7 @@ const SearchFilter = () => {
             aria-label="Default select example">
                 <option value='' >Filter by Region</option>
                 <option value="africa">Africa</option>
+                <option value="americas">America</option>
                 <option value="asia">Asia</option>
                 <option value="europe">Europe</option>
                 <option value="oceania">Oceania</option>

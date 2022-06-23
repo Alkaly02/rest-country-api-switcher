@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {useParams, Link} from 'react-router-dom'
 import useCountry from '../hooks/useCountry';
 import CountryItemDetails from '../components/CountryItemDetails'
+import {FaArrowLeft} from 'react-icons/fa'
 
 const CountryDetails = () => {
     const {countryName} = useParams();
@@ -17,7 +18,7 @@ const CountryDetails = () => {
     }, [countryName,countries])
   return (
     <div>
-        <Link className='btn btn-outline-secondary' to='/'>See Countries</Link>
+        <Link className='btn btn-outline-secondary' to='/'><FaArrowLeft /></Link>
         <div className="row gy-4 mt-3">
             {
                 countryDetails?.map( (country, index) => (
