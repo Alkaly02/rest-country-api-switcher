@@ -20,8 +20,8 @@ const SearchFilter = () => {
     }
 
   return (
-    <div className='d-flex justify-content-between align-items-center position-relative'>
-        <div className="form shadow position-relative">
+    <div className='d-sm-flex justify-content-between align-items-center position-relative'>
+        <div className="form shadow position-relative mb-sm-0 mb-2">
             <form onSubmit={handleSubmit} action="">
                 <FaSearchLocation className='position-absolute search' />
                 <input
