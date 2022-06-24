@@ -7,16 +7,19 @@ const SearchFilter = () => {
     const [input, setInput] = useState('');
     const [select, setSelect] = useState('')
     const [error, setError] = useState('');
+    const [searchByRegion, setSearchByRegion] = useState([])
 
-    const handleSubmit = (e) => {
+    const searchCountry = (e) => {
         e.preventDefault()
-        const newCountry = countries.filter(country => country.name.common.toUpperCase() === input.toUpperCase());
+        const newCountry = searchByRegion.length !== 0 ? 
+        searchByRegion.filter(country => country.name.common.toUpperCase() === input.toUpperCase()) :
+        countries.filter(country => country.name.common.toUpperCase() === input.toUpperCase());
         
         if(newCountry.length !== 0) {
             setError('')
-            setShowCountries(newCountry)
+            return setShowCountries(newCountry)
         }else{
-            setError('Pays intouvable !')
+            return setShowCountries([])
         }
     }
 
@@ -25,6 +28,7 @@ const SearchFilter = () => {
     }
     useEffect(() => {
         const countryWithSameRegion = countries.filter(country => country.region.toUpperCase() === select.toUpperCase());
+        setSearchByRegion(countryWithSameRegion);
         if(countryWithSameRegion.length !== 0){
             setShowCountries(countryWithSameRegion)
         }
@@ -33,7 +37,7 @@ const SearchFilter = () => {
   return (
     <div className='d-sm-flex justify-content-between align-items-center position-relative'>
         <div className="form shadow position-relative mb-sm-0 mb-2">
-            <form onSubmit={handleSubmit} action="">
+            <form onSubmit={searchCountry} action="">
                 <FaSearchLocation className='position-absolute search' />
                 <input
                 value={input}
