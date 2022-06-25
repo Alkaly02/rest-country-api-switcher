@@ -7,7 +7,10 @@ const AutoComplete = ({countries, searchCountryOnAutoComplete, input}) => {
             countries.filter(country => country.name.common.toUpperCase().startsWith(input.toUpperCase()))
             .map((country, index) => (
                 <div style={{cursor: 'pointer'}} className='my-1' key={`${country.name.common}-${index}`}>
-                    <span onClick={() => searchCountryOnAutoComplete(country.name.common) }> <img style={{width: '20px', fontSize: '0.8rem'}} src={country.flags.png} alt='Crountry flag' /> {country.name.common}</span>
+                    <span onClick={() => searchCountryOnAutoComplete(country.name.common) }>
+                       <img className='me-2' style={{width: '20px', fontSize: '0.8rem'}} src={country.flags.png} alt='Crountry flag' /> 
+                       {country.name.common}
+                    </span>
                 </div> 
             ))
         }
