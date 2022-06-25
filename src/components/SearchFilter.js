@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import {FaSearchLocation} from 'react-icons/fa'
 import useCountry from '../hooks/useCountry';
+import AutoComplete from './AutoComplete';
+import SearchForm from './SearchForm';
+import FilterRegion from './FilterRegion';
 
 const SearchFilter = () => {
     const {countries, setShowCountries} = useCountry()
@@ -9,7 +11,6 @@ const SearchFilter = () => {
     const [searchByRegion, setSearchByRegion] = useState([])
     // autocompletion
     const [display, setDisplay] = useState(false);
-    const [search, setSearch] = useState('')
 
     const searchCountry = (e) => {
         e.preventDefault()
@@ -59,43 +60,21 @@ const SearchFilter = () => {
   return (
     <div className='d-sm-flex justify-content-between align-items-center position-relative'>
         <div className="form shadow position-relative mb-sm-0 mb-2">
-            <form autoComplete='off' onSubmit={searchCountry} action="">
-                <FaSearchLocation className='position-absolute search' />
-                <input
-                value={input}
-                onChange={onInputChange}
-                placeholder='Search for a country'
-                type="search" 
-                id="search" 
-                className="form-control px-5" 
-                aria-describedby="searchHelp" />
-            </form>
+            <SearchForm 
+            searchCountry={searchCountry} 
+            input={input} 
+            onInputChange={onInputChange} />
             {/* autoComplete */}
             {
-                (display && input !== '' ) && <div style={{zIndex: '999', left: '45%'}} className='bg-light p-2 position-absolute text-dark'>
-                        {
-                            countries.filter(country => country.name.common.toUpperCase().startsWith(input.toUpperCase()))
-                            .map((country, index) => (
-                                <div key={`${country.name.common}-${index}`}>
-                                    <span onClick={() => searchCountryOnAutoComplete(country.name.common) }>{country.name.common}</span>
-                                </div> 
-                            ))
-                        }
-                    </div>
+                (display && input !== '' ) && <AutoComplete 
+                countries={countries} 
+                searchCountryOnAutoComplete={searchCountryOnAutoComplete}
+                input={input}
+                />
             }
         </div>
         <div className="select shadow">
-            <select 
-            onChange={handleSelect} 
-            className="form-select" 
-            aria-label="Default select example">
-                <option value='' >Filter by Region</option>
-                <option value="africa">Africa</option>
-                <option value="americas">America</option>
-                <option value="asia">Asia</option>
-                <option value="europe">Europe</option>
-                <option value="oceania">Oceania</option>
-            </select>
+            <FilterRegion handleSelect={handleSelect} />
         </div>
     </div>
   )
